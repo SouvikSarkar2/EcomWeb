@@ -21,6 +21,14 @@ const config: Config = {
         extra: "#ffab87",
         text: "#F8F1DD",
       },
+
+      fontFamily: {
+        cerlions: ["var(--font-cerlions)"],
+        ageya: ["var(--font-ageya)"],
+        canopee: ["var(--font-canopee)"],
+        confillia: ["var(--font-confillia)"],
+        dahlia: ["var(--font-dahlia)"],
+      },
     },
   },
   plugins: [],
