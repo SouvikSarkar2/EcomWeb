@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import localfont from "next/font/local";
+import { ProvidesTheQueryClient } from "@/components/ProvidesTheQueryClient";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -65,7 +66,7 @@ export default function RootLayout({
       <body
         className={`${cerlions.variable} ${ageya.variable} ${canopee.variable} ${confillia.variable} ${dahlia.variable} ${inter.className}`}
       >
-        {children}
+        <ProvidesTheQueryClient>{children}</ProvidesTheQueryClient>
       </body>
     </html>
   );

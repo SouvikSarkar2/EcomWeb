@@ -20,7 +20,7 @@ export default function Home() {
         width={500}
         height={500}
       />
-      <Link href={"/home"}>
+      <Link href={"/main"}>
         <div className="bg-tertiary px-7 py-2 sm:px-10 sm:py-4 rounded-full cursor-pointer text-text">
           Enter
         </div>
