@@ -14,7 +14,7 @@ export default function Home() {
         destination.&quot;
       </div>
       <Image
-        className="absolute right-10 top-[60%] hidden sm:flex"
+        className="absolute right-10 bottom-2 hidden 2xl:flex"
         alt="dooodle image"
         src={"/png/DoogieDoodle.png"}
         width={500}
