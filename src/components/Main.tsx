@@ -20,19 +20,29 @@ const Main = ({ searchParams }) => {
 
   useEffect(() => {
     setQuery(searchParams.q || "products");
-    refetch();
-  }, [searchParams.q, refetch]);
+  }, [searchParams.q]);
+
+  useEffect(() => {
+    if (query) {
+      refetch();
+    }
+  }, [query, refetch]);
 
   if (isPending) return "Loading...";
 
   if (error) return "An error has occurred: " + error.message;
 
   return (
-    <section className="min-h-screen bg-[#F8F1DD]">
+    <section className="min-h-[84vh] bg-[#F8F1DD]">
       <div className="flex justify-center items-center text-4xl sm:text-6xl py-10 font-cerlions font-bold">
         <div>Products</div>
       </div>
       <div className="flex flex-col sm:flex-row m-4 gap-6 flex-wrap justify-center pb-10">
+        {data.length === 0 && (
+          <div className="font-bold text-xl text-red-400 justify-center flex">
+            No Products found
+          </div>
+        )}
         {data.map((data) => (
           <Card data={data} key={data.id} />
         ))}
