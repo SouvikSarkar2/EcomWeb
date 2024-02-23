@@ -1,25 +1,19 @@
+import { Plus } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 
 const Card = ({ data }) => {
-  const image = data.images[0];
-  let url = image;
-  if (url.startsWith("[")) {
-    // Link starts with brackets, use substring
-    url = url.substring(2, url.length - 2);
-  }
-  if (url.startsWith("1")) {
-    return <>none</>;
-  }
-  console.log("url from card :", url);
   return (
-    <div className="bg-[#F8F1DD] h-[300px] w-[screen] sm:w-[200px] flex">
-      <div className="">
-        <Image src={url} width={200} height={200} />
+    <div className="bg-[#7F888F] h-[200px] w-[screen] sm:w-[400px] flex rounded-lg items-center gap-6 p-4 mt-1 relative">
+      <div className=" h-[150px] w-1/3 overflow-hidden rounded-lg">
+        <Image src={data?.image} height={150} width={150} />
       </div>
-      <div className="">
-        <div>{data.title}</div>
-        <div>{data.price}</div>
+      <div className="w-2/3 text-text font-semibold flex flex-col gap-10">
+        <div>{data?.title}</div>
+        <div className="font-bold text-primary">${data?.price}</div>
+      </div>
+      <div className="absolute right-4 bottom-4 bg-primary rounded-full text-secondary cursor-pointer">
+        <Plus />
       </div>
     </div>
   );
