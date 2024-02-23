@@ -1,11 +1,12 @@
 import Header from "@/components/Header";
 import Main from "@/components/Main";
 
-const page = () => {
+const page = ({ searchParams }) => {
+  /*  console.log(searchParams); */
   return (
     <div className="">
       <Header />
-      <Main />
+      <Main searchParams={searchParams} />
     </div>
   );
 };
