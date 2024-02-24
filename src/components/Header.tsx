@@ -15,7 +15,7 @@ function Header() {
   ];
   return (
     <>
-      <section className=" min-h-[120px] max-w-[1920px] overflow-hidden flex justify-center items-center bg-[#F8F1DD]  text-black">
+      <section className="sticky top-0 z-10 min-h-[120px] max-w-[1920px] overflow-visible flex justify-center items-center bg-[#F8F1DD]  text-black">
         <div className="min-w-[90vw] top-0 flex justify-between sm:min-w-[85vw] bg-primary min-h-[10px] items-center font-bold p-6 mt-4 rounded-3xl">
           <div
             className=" font-bold text-3xl font-canopee cursor-pointer"

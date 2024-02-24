@@ -1,24 +1,53 @@
-import { Plus } from "lucide-react";
+import { CartContext } from "@/Context/CartContext";
+import { Minus, Plus } from "lucide-react";
 import Image from "next/image";
-import React from "react";
+import React, { useContext } from "react";
 
 const Card = ({ data }) => {
+  const cartData = useContext(CartContext);
+  const setFunc = cartData[1];
+  let present = false;
+  let count = 0;
+  const presentCheck = () => {
+    cartData[0].map((item) => {
+      if (data.id === item.id) {
+        present = true;
+        count = item.count;
+      }
+    });
+  };
+  presentCheck();
+
+  // console.log(present);
+
   const handleAdd = () => {
-    const storageData = localStorage.getItem("cart");
-    if (!storageData) {
-      const initialObject = { objects: [] };
-      const initialData = JSON.stringify(initialObject);
-      localStorage.setItem("cart", `${initialData}`);
-    }
-    const jsonData = JSON.parse(storageData);
-    // console.log("jsonData :", jsonData);
-    const newData = (jsonData, data) => {
-      jsonData?.objects.push(data);
-      return jsonData;
-    };
-    const updatedData = newData(jsonData, data);
-    localStorage.setItem("cart", `${JSON.stringify(updatedData)}`);
-    console.log("updatedData :", updatedData);
+    setFunc([...cartData[0], { ...data, count: 1 }]);
+  };
+
+  const increment = () => {
+    setFunc((prevCartData) => {
+      const updatedData = prevCartData.map((item) => {
+        if (item.id === data.id) {
+          return { ...item, count: item.count + 1 };
+        }
+        return item;
+      });
+      return updatedData;
+    });
+  };
+
+  const decrement = () => {
+    setFunc((prevCartData) => {
+      const updatedData = prevCartData
+        .map((item) => {
+          if (item.id === data.id && item.count > 0) {
+            return { ...item, count: item.count - 1 };
+          }
+          return item;
+        })
+        .filter((item) => item.count !== 0);
+      return updatedData;
+    });
   };
 
   return (
@@ -30,13 +59,30 @@ const Card = ({ data }) => {
         <div>{data?.title}</div>
         <div className="font-bold text-primary">${data?.price}</div>
       </div>
-      <div className="absolute right-4 bottom-4 bg-primary rounded-full text-secondary cursor-pointer">
-        <Plus
-          onClick={() => {
-            handleAdd();
-          }}
-        />
-      </div>
+
+      {!present ? (
+        <div className="absolute right-4 bottom-4 bg-primary rounded-full text-secondary cursor-pointer font-bold px-2 py-1">
+          <div
+            onClick={() => {
+              handleAdd();
+            }}
+          >
+            ADD
+          </div>
+        </div>
+      ) : (
+        <div className="flex gap-2 font-bold absolute right-4 bottom-4">
+          <Plus
+            className="bg-primary rounded-full"
+            onClick={() => increment()}
+          />
+          <div className="text-text">{count}</div>
+          <Minus
+            className="bg-primary rounded-full"
+            onClick={() => decrement()}
+          />
+        </div>
+      )}
     </div>
   );
 };

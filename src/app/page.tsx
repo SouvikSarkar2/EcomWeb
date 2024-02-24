@@ -17,8 +17,8 @@ export default function Home() {
         className="absolute right-10 bottom-2 hidden 2xl:flex"
         alt="dooodle image"
         src={"/png/DoogieDoodle.png"}
-        width={500}
-        height={500}
+        width={300}
+        height={300}
       />
       <Link href={"/main"}>
         <div className="bg-tertiary px-7 py-2 sm:px-10 sm:py-4 rounded-full cursor-pointer text-text">

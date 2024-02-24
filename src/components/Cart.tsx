@@ -1,13 +1,30 @@
 "use client";
 
 import { ShoppingCart, X } from "lucide-react";
-import { useState } from "react";
-import CartCard from "@/components/CartCard";
+import { useContext, useEffect, useState } from "react";
+import { CartContext } from "@/Context/CartContext";
+import CartCard from "./CartCard";
+import { useRouter } from "next/navigation";
 
 const Cart = () => {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
-  const data = JSON.parse(localStorage.getItem("cart"));
-  console.log("data from cart :", data);
+  const data = useContext(CartContext);
+  const cart = data[0];
+  const [cost, setCost] = useState(0);
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    setCost(0);
+    setCount(0);
+    cart.map((item) => {
+      setCost((cost) => (cost += item.price * item.count));
+      setCount((count) => (count += item.count));
+    });
+  }, [cart]);
+
+  console.log("data from cart :", cart);
+
   return (
     <div>
       {!isOpen ? (
@@ -16,27 +33,46 @@ const Cart = () => {
           onClick={() => setIsOpen(!isOpen)}
         >
           Cart
-          <ShoppingCart />
+          <div className="relative">
+            <ShoppingCart />
+            <div className="absolute -top-3 -right-2 text-xs bg-red-500 text-text rounded-full px-1">
+              {count !== 0 && count}
+            </div>
+          </div>
         </div>
       ) : (
-        <div className="absolute right-0 top-0 w-screen sm:w-[30vw] h-screen overflow-scroll z-10 bg-text border-4 border-primary rounded-lg">
+        <div className="absolute overflow-y-scroll right-0 top-0 w-screen sm:w-[30vw] h-screen z-20 bg-text border-4 border-primary rounded-lg">
           <div className="flex flex-row-reverse pt-4 pr-4">
             <X onClick={() => setIsOpen(!isOpen)} className="cursor-pointer" />
           </div>
           <div className="flex justify-center items-center h-[100px] text-4xl font-dahlia">
             Your Cart
           </div>
-          {!data && (
+          {data[0].length === 0 && (
             <div className="flex justify-center items-center h-[200px] text-xl font-normal">
               Start By Adding Something
             </div>
           )}
-          <div>
-            {data?.objects.map((item) => (
-              <div>
-                <CartCard item={item} />
-              </div>
+          <div className="p-4 flex flex-col gap-4 overflow-y-scroll max-h-[70vh]">
+            {cart.map((item) => (
+              <CartCard item={item} />
             ))}
+          </div>
+          <div className="absolute bottom-6 flex justify-around w-full items-center">
+            <div> Total Amount : ${parseFloat(cost.toFixed(2))}</div>
+            <div
+              className={`${
+                cost === 0
+                  ? "hidden"
+                  : "bg-[#7F888F] text-text px-4 py-2 rounded-xl cursor-pointer"
+              }`}
+              onClick={() => {
+                localStorage.setItem("price", `${cost}`);
+                router.push("/payment");
+              }}
+            >
+              Checkout
+            </div>
           </div>
         </div>
       )}
