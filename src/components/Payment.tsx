@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 
 const Payment = () => {
-  const totalAmount = localStorage.getItem("price");
+  const totalAmount = 0;
   const router = useRouter();
   return (
     <div className="bg-text h-screen flex flex-col p-6 text-3xl font-bold">
