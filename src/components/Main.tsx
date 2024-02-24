@@ -3,6 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import Card from "@/components/Card";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 interface SearchParams {
   q: string;
@@ -32,7 +33,18 @@ const Main: React.FC<{ searchParams: SearchParams }> = ({ searchParams }) => {
     }
   }, [query, refetch]);
 
-  if (isPending) return "Loading...";
+  if (isPending)
+    return (
+      <div className="flex justify-center items-center h-[86vh] sm:h-[84vh] bg-text">
+        <Image
+          alt=""
+          className="bg-text"
+          src={"/loader.svg"}
+          width={100}
+          height={100}
+        />
+      </div>
+    );
 
   if (error) return "An error has occurred: " + error.message;
 
