@@ -1,12 +1,16 @@
 "use client";
 import Cart from "@/components/Cart";
-import { revalidatePath } from "next/cache";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, SetStateAction, Dispatch } from "react";
+
+type StateType = null | number;
+type SetStateType = Dispatch<SetStateAction<StateType>>;
 
 function Header() {
   const router = useRouter();
-  const [isActive, setIsActive]: SetStateAction<null | number> = useState(null);
+  const [isActive, setIsActive]: [StateType, SetStateType] =
+    useState<StateType>(null);
+
   const menu = [
     { category: "electronics", link: "electronics" },
     { category: "jewelery", link: "jewelery" },
@@ -26,7 +30,7 @@ function Header() {
           <div className="hidden sm:flex gap-6 font-bold font-confillia text-2xl uppercase">
             {menu.map((item, index) => (
               <div
-                key={item}
+                key={index}
                 onClick={() => {
                   setIsActive(index);
                   router.push(`/main?q=${item.link}`);

@@ -4,7 +4,11 @@ import { useQuery } from "@tanstack/react-query";
 import Card from "@/components/Card";
 import { useEffect, useState } from "react";
 
-const Main = ({ searchParams }) => {
+interface SearchParams {
+  q: string;
+}
+
+const Main: React.FC<{ searchParams: SearchParams }> = ({ searchParams }) => {
   const [query, setQuery] = useState(searchParams.q || "products");
   const { isPending, error, data, refetch } = useQuery({
     queryKey: ["repoData"],
@@ -43,7 +47,7 @@ const Main = ({ searchParams }) => {
             No Products found
           </div>
         )}
-        {data.map((data) => (
+        {data.map((data: any) => (
           <Card data={data} key={data.id} />
         ))}
       </div>

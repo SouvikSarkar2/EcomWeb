@@ -23,7 +23,7 @@ const Cart = () => {
     });
   }, [cart]);
 
-  console.log("data from cart :", cart);
+  // console.log("data from cart :", cart);
 
   return (
     <div>
@@ -55,7 +55,7 @@ const Cart = () => {
           )}
           <div className="p-4 flex flex-col gap-4 overflow-y-scroll max-h-[70vh]">
             {cart.map((item) => (
-              <CartCard item={item} />
+              <CartCard item={item} key={item.id} />
             ))}
           </div>
           <div className="absolute bottom-6 flex justify-around w-full items-center">

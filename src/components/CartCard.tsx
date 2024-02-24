@@ -5,8 +5,8 @@ import { Minus, Plus } from "lucide-react";
 import Image from "next/image";
 import { useContext } from "react";
 
-const CartCard = ({ item }) => {
-  console.log(item);
+const CartCard = ({ item }: any) => {
+  // console.log(item);
   const cartData = useContext(CartContext);
   const setFunc = cartData[1];
 
@@ -39,7 +39,7 @@ const CartCard = ({ item }) => {
   return (
     <div className="w-full min-h-[100px] bg-[#7F888F] flex justify-around items-center rounded-2xl text-text">
       <div className="flex justify-center items-center w-1/3 overflow-hidden">
-        <Image src={item.image} height={50} width={50} />
+        <Image alt="" src={item.image} height={50} width={50} />
       </div>
       <div className="w-2/3 flex justify-around">
         <div className="flex gap-2 ">

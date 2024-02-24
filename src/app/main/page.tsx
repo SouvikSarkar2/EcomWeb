@@ -2,8 +2,12 @@ import CartProvider from "@/Context/CartContext";
 import Header from "@/components/Header";
 import Main from "@/components/Main";
 
-const page = ({ searchParams }) => {
-  /*  console.log(searchParams); */
+interface SearchParams {
+  q: string;
+}
+
+const page: React.FC<{ searchParams: SearchParams }> = ({ searchParams }) => {
+  // console.log("searchParams : ", searchParams);
   return (
     <div className="">
       <CartProvider>
