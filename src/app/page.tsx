@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="bg-secondary text-text flex justify-center items-center h-full flex-col gap-4">
+    <div className="bg-secondary text-text flex justify-center items-center h-full flex-col gap-4 overflow-hidden">
       <Navbar />
       <div className="text-5xl sm:text-7xl font-bold text-center">
         <div className="font-ageya sm:text-[100px]">Welcome To Ecomweb</div>
