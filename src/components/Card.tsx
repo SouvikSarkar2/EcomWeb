@@ -3,7 +3,7 @@ import { Minus, Plus } from "lucide-react";
 import Image from "next/image";
 import React, { useContext } from "react";
 
-const Card = ({ data }) => {
+const Card = ({ data }: any) => {
   const cartData = useContext(CartContext);
   const setFunc = cartData[1];
   let present = false;
